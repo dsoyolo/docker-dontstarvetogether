@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  overworld:
+    image: yeetzone/dontstarvetogether
+    container_name: overworld
+    hostname: overworld
+    depends_on:
+      - data
+    env_file:
+      - overworld.env
+    ports:
+      - "10999:10999/udp"
+    volumes:
+      - type: volume
+        source: data
+        target: /data
+  underworld1:
+    image: yeetzone/dontstarvetogether
+    container_name: underworld1
+    hostname: underworld1
+    depends_on:
+      - data
+    env_file:
+      - underworld1.env
+    ports:
+      - "11000:11000/udp"
+    volumes:
+      - type: volume
+        source: data
+        target: /data
+  data:
+    image: yeetzone/dontstarvetogether-data
+    volumes:
+      - type: volume
+        source: data
+        target: /data
+volumes:
+  data:
